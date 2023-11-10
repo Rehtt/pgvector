@@ -1,0 +1,19 @@
+ARG PG_MAJOR=16.0
+
+FROM postgres:${PG_MAJOR}-alpine3.18
+ARG PG_MAJOR
+
+COPY . /tmp/pgvector
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+# RUN apk add --no-cache git build-base clang15 llvm15 postgresql${PG_MAJOR}-dev && \
+RUN apk add --no-cache git build-base clang15 llvm15 && \
+    cd /tmp/pgvector && \
+    make clean && \
+    make OPTFLAGS="" && \
+    make install && \
+    mkdir -p /usr/share/doc/pgvector && \
+    cp LICENSE README.md /usr/share/doc/pgvector && \
+    # apk del --no-cache build-base clang15 llvm15 postgresql${PG_MAJOR}-dev && \
+    apk del --no-cache build-base clang15 llvm15 && \
+    rm -r /tmp/pgvector

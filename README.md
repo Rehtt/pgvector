@@ -170,7 +170,7 @@ An IVFFlat index divides vectors into lists, and then searches a subset of those
 
 Three keys to achieving good recall are:
 
-1. Create the index *after* the table has some data
+1. Create the index _after_ the table has some data
 2. Choose an appropriate number of lists - a good place to start is `rows / 1000` for up to 1M rows and `sqrt(rows)` for over 1M rows
 3. When querying, specify an appropriate number of [probes](#query-options) (higher is better for recall, lower is better for speed) - a good place to start is `sqrt(lists)`
 
@@ -373,29 +373,29 @@ CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 1000
 
 Use pgvector from any language with a Postgres client. You can even generate and store vectors in one language and query them in another.
 
-Language | Libraries / Examples
---- | ---
-C | [pgvector-c](https://github.com/pgvector/pgvector-c)
-C++ | [pgvector-cpp](https://github.com/pgvector/pgvector-cpp)
-C# | [pgvector-dotnet](https://github.com/pgvector/pgvector-dotnet)
-Crystal | [pgvector-crystal](https://github.com/pgvector/pgvector-crystal)
-Dart | [pgvector-dart](https://github.com/pgvector/pgvector-dart)
-Elixir | [pgvector-elixir](https://github.com/pgvector/pgvector-elixir)
-Go | [pgvector-go](https://github.com/pgvector/pgvector-go)
-Haskell | [pgvector-haskell](https://github.com/pgvector/pgvector-haskell)
-Java, Kotlin, Groovy, Scala | [pgvector-java](https://github.com/pgvector/pgvector-java)
-JavaScript, TypeScript | [pgvector-node](https://github.com/pgvector/pgvector-node)
-Julia | [pgvector-julia](https://github.com/pgvector/pgvector-julia)
-Lua | [pgvector-lua](https://github.com/pgvector/pgvector-lua)
-Nim | [pgvector-nim](https://github.com/pgvector/pgvector-nim)
-Perl | [pgvector-perl](https://github.com/pgvector/pgvector-perl)
-PHP | [pgvector-php](https://github.com/pgvector/pgvector-php)
-Python | [pgvector-python](https://github.com/pgvector/pgvector-python)
-R | [pgvector-r](https://github.com/pgvector/pgvector-r)
-Ruby | [pgvector-ruby](https://github.com/pgvector/pgvector-ruby), [Neighbor](https://github.com/ankane/neighbor)
-Rust | [pgvector-rust](https://github.com/pgvector/pgvector-rust)
-Swift | [pgvector-swift](https://github.com/pgvector/pgvector-swift)
-Zig | [pgvector-zig](https://github.com/pgvector/pgvector-zig)
+| Language                    | Libraries / Examples                                                                                       |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| C                           | [pgvector-c](https://github.com/pgvector/pgvector-c)                                                       |
+| C++                         | [pgvector-cpp](https://github.com/pgvector/pgvector-cpp)                                                   |
+| C#                          | [pgvector-dotnet](https://github.com/pgvector/pgvector-dotnet)                                             |
+| Crystal                     | [pgvector-crystal](https://github.com/pgvector/pgvector-crystal)                                           |
+| Dart                        | [pgvector-dart](https://github.com/pgvector/pgvector-dart)                                                 |
+| Elixir                      | [pgvector-elixir](https://github.com/pgvector/pgvector-elixir)                                             |
+| Go                          | [pgvector-go](https://github.com/pgvector/pgvector-go)                                                     |
+| Haskell                     | [pgvector-haskell](https://github.com/pgvector/pgvector-haskell)                                           |
+| Java, Kotlin, Groovy, Scala | [pgvector-java](https://github.com/pgvector/pgvector-java)                                                 |
+| JavaScript, TypeScript      | [pgvector-node](https://github.com/pgvector/pgvector-node)                                                 |
+| Julia                       | [pgvector-julia](https://github.com/pgvector/pgvector-julia)                                               |
+| Lua                         | [pgvector-lua](https://github.com/pgvector/pgvector-lua)                                                   |
+| Nim                         | [pgvector-nim](https://github.com/pgvector/pgvector-nim)                                                   |
+| Perl                        | [pgvector-perl](https://github.com/pgvector/pgvector-perl)                                                 |
+| PHP                         | [pgvector-php](https://github.com/pgvector/pgvector-php)                                                   |
+| Python                      | [pgvector-python](https://github.com/pgvector/pgvector-python)                                             |
+| R                           | [pgvector-r](https://github.com/pgvector/pgvector-r)                                                       |
+| Ruby                        | [pgvector-ruby](https://github.com/pgvector/pgvector-ruby), [Neighbor](https://github.com/ankane/neighbor) |
+| Rust                        | [pgvector-rust](https://github.com/pgvector/pgvector-rust)                                                 |
+| Swift                       | [pgvector-swift](https://github.com/pgvector/pgvector-swift)                                               |
+| Zig                         | [pgvector-zig](https://github.com/pgvector/pgvector-zig)                                                   |
 
 ## Frequently Asked Questions
 
@@ -509,32 +509,32 @@ Each vector takes `4 * dimensions + 8` bytes of storage. Each element is a singl
 
 ### Vector Operators
 
-Operator | Description | Added
---- | --- | ---
-\+ | element-wise addition |
-\- | element-wise subtraction |
-\* | element-wise multiplication | 0.5.0
-<-> | Euclidean distance |
-<#> | negative inner product |
-<=> | cosine distance |
+| Operator | Description                 | Added |
+| -------- | --------------------------- | ----- |
+| \+       | element-wise addition       |
+| \-       | element-wise subtraction    |
+| \*       | element-wise multiplication | 0.5.0 |
+| <->      | Euclidean distance          |
+| <#>      | negative inner product      |
+| <=>      | cosine distance             |
 
 ### Vector Functions
 
-Function | Description | Added
---- | --- | ---
-cosine_distance(vector, vector) → double precision | cosine distance |
-inner_product(vector, vector) → double precision | inner product |
-l2_distance(vector, vector) → double precision | Euclidean distance |
-l1_distance(vector, vector) → double precision | taxicab distance | 0.5.0
-vector_dims(vector) → integer | number of dimensions |
-vector_norm(vector) → double precision | Euclidean norm |
+| Function                                           | Description          | Added |
+| -------------------------------------------------- | -------------------- | ----- |
+| cosine_distance(vector, vector) → double precision | cosine distance      |
+| inner_product(vector, vector) → double precision   | inner product        |
+| l2_distance(vector, vector) → double precision     | Euclidean distance   |
+| l1_distance(vector, vector) → double precision     | taxicab distance     | 0.5.0 |
+| vector_dims(vector) → integer                      | number of dimensions |
+| vector_norm(vector) → double precision             | Euclidean norm       |
 
 ### Aggregate Functions
 
-Function | Description | Added
---- | --- | ---
-avg(vector) → vector | average |
-sum(vector) → vector | sum | 0.5.0
+| Function             | Description | Added |
+| -------------------- | ----------- | ----- |
+| avg(vector) → vector | average     |
+| sum(vector) → vector | sum         | 0.5.0 |
 
 ## Installation Notes
 
@@ -602,6 +602,20 @@ You can also build the image manually:
 git clone --branch v0.5.1 https://github.com/pgvector/pgvector.git
 cd pgvector
 docker build --build-arg PG_MAJOR=15 -t myuser/pgvector .
+```
+
+You can also get the [alpine base image](https://hub.docker.com/r/rehtt/pgvector) with:
+
+```sh
+docker pull rehtt/pgvector
+```
+
+You can also build the image use alpine base system:
+
+```sh
+git clone https://github.com/pgvector/pgvector.git
+cd pgvector
+docker build --build-arg PG_MAJOR=16.0 -t myuser/pgvector -f Dockerfile.alpine .
 ```
 
 ### Homebrew
